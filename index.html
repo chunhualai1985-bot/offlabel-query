@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#075c63">
+  <meta name="description" content="南昌市人民医院超说明书用药目录查询">
+  <title>超说明书用药查询</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">药</div>
+      <div>
+        <p>南昌市人民医院</p>
+        <h1>超说明书用药查询</h1>
+      </div>
+    </div>
+    <button id="shareBtn" class="ghost-btn" type="button" aria-label="复制本页链接">
+      <span aria-hidden="true">↗</span><span>分享</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="search-panel" aria-label="查询条件">
+      <label class="search-box" for="searchInput">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" autocomplete="off" placeholder="搜索药品、用途、科室或关键词">
+        <button id="clearSearch" class="clear-search" type="button" aria-label="清空搜索">×</button>
+      </label>
+      <div class="filters">
+        <label>
+          <span>申请科室</span>
+          <select id="departmentFilter"><option value="">全部科室</option></select>
+        </label>
+        <label>
+          <span>证据等级</span>
+          <select id="gradeFilter"><option value="">全部等级</option></select>
+        </label>
+        <label>
+          <span>超说明书类型</span>
+          <select id="typeFilter"><option value="">全部类型</option></select>
+        </label>
+      </div>
+    </section>
+
+    <section class="results-section" aria-live="polite">
+      <div class="results-heading">
+        <div>
+          <h2>查询结果</h2>
+          <p id="resultSummary">正在载入目录…</p>
+        </div>
+        <button id="resetBtn" class="text-btn" type="button">重置条件</button>
+      </div>
+      <div id="resultList" class="result-list"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        <div aria-hidden="true">⌕</div>
+        <h3>没有找到匹配条目</h3>
+        <p>请尝试缩短关键词或清除筛选条件。</p>
+        <button id="emptyResetBtn" type="button">查看全部目录</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>使用说明</strong>
+    <p>本页面仅用于院内快速查询。临床使用应以医院现行正式审批目录、药品说明书及相关管理制度为准。</p>
+    <p class="version-note">当前收录 <span id="footerCount">—</span> 项 · 数据来源：医院超说明书用药汇总表</p>
+  </footer>
+
+  <div id="detailOverlay" class="overlay" hidden>
+    <section class="detail-sheet" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <div class="detail-header">
+        <div>
+          <p id="detailDepartment" class="eyebrow"></p>
+          <h2 id="detailTitle"></h2>
+        </div>
+        <button id="closeDetail" class="close-btn" type="button" aria-label="关闭详情">×</button>
+      </div>
+      <div id="detailTags" class="detail-tags"></div>
+      <dl class="detail-grid">
+        <div><dt>超说明书使用内容</dt><dd id="detailOffLabel" class="highlight-text"></dd></div>
+        <div><dt>现行说明书中规定内容</dt><dd id="detailLabel"></dd></div>
+        <div><dt>证据类型</dt><dd id="detailEvidence"></dd></div>
+        <div><dt>推荐意见</dt><dd id="detailGrade"></dd></div>
+        <div><dt>目录版本</dt><dd id="detailVersion"></dd></div>
+        <div><dt>原目录序号</dt><dd id="detailSourceNo"></dd></div>
+      </dl>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
